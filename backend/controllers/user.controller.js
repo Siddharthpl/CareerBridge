@@ -95,13 +95,18 @@ export const login = async (req, res) => {
     };
     console.log('Token:', token);
     console.log('Cookie set:', res.cookie);
+    console.log('Setting cookie with options:', {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000
+      });
     return res
       .status(200)
       .cookie("token", token, {
-        httpOnly: true,
+        httpsOnly: true,
         secure: true,
         sameSite: "none", // Critical for cross-site cookies
-        domain: ".onrender.com",
         maxAge: 24 * 60 * 60 * 1000,
       })
       .json({
