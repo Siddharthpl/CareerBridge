@@ -98,10 +98,11 @@ export const login = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000,
-        httpOnly: true, // Note: You had a typo 'httpsOnly'
-        sameSite: "strict",
-        secure: true, // Important for HTTPS deployments
+        httpOnly: true,
+        secure: true,
+        sameSite: "none", // Critical for cross-site cookies
+        domain: ".onrender.com",
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .json({
         message: `Welcome back ${user.fullname}`,
