@@ -50,6 +50,7 @@ export const login = async (req, res) => {
     try {
         const { email, password, role } = req.body;
         
+        console.log(email);
         if (!email || !password || !role) {
             return res.status(400).json({
                 message: "Something is missing",
@@ -81,8 +82,8 @@ export const login = async (req, res) => {
         const tokenData = {
             userId: user._id
         }
-        const token = await jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
-
+        const token = jwt.sign(tokenData, process.env.SECRET_KEY, { expiresIn: '1d' });
+console.log("token",token)
         user = {
             _id: user._id,
             fullname: user.fullname,
@@ -91,6 +92,7 @@ export const login = async (req, res) => {
             role: user.role,
             profile: user.profile
         }
+
 
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
             message: `Welcome back ${user.fullname}`,
