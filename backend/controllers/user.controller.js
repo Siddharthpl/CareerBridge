@@ -85,7 +85,6 @@ export const login = async (req, res) => {
     const token = jwt.sign(tokenData, process.env.SECRET_KEY, {
       expiresIn: "1d",
     });
-    console.log("token", token);
     user = {
       _id: user._id,
       fullname: user.fullname,
@@ -94,7 +93,8 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-
+    console.log('Token:', token);
+    console.log('Cookie set:', res.cookie);
     return res
       .status(200)
       .cookie("token", token, {
