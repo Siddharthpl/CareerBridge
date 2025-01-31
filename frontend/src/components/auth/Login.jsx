@@ -35,6 +35,7 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         withCredentials: true,
+        credentials: "include", // Additional setting
       });
       console.log("data", res);
       if (res.data.success) {
