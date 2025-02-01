@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "@/redux/authSlice";
 import { Loader2 } from "lucide-react";
+axios.defaults.withCredentials = true;
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -31,22 +32,26 @@ const Login = () => {
     try {
       dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
-        },
-        withCredentials: true,
-        credentials: "include", // Additional setting
+        }
       });
-      console.log("data", res);
+      
+      // Add more logging
+      console.log('Full Response:', res);
+      console.log('Response Headers:', res.headers);
+      console.log('Response Cookies:', document.cookie);
+  
       if (res.data.success) {
-        console.log("inside if", res.data);
         dispatch(setUser(res.data.user));
         navigate("/");
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      console.error('Full Error:', error);
+      console.error('Error Response:', error.response);
+      toast.error(error.response?.data?.message || 'Login failed');
     } finally {
       dispatch(setLoading(false));
     }
