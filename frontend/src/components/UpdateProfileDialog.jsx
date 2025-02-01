@@ -43,7 +43,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         formData.append("bio", input.bio);
         formData.append("skills", input.skills);
         if (input.file) {
-            console.log(input.file)
+            
             formData.append("file", input.file);
         }
         try {
@@ -55,8 +55,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 withCredentials: true
             });
             if (res.data.success) {
-                console.log("res")
-                console.log(res.data.user);
+                
+                
                 dispatch(setUser(res.data.user));
                 toast.success(res.data.message);
             }
@@ -67,7 +67,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             setLoading(false);
         }
         setOpen(false);
-        console.log(input);
+        
     }
 
 

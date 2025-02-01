@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "https://careerbridge-frontend-eqse.onrender.com",
+      "https://careerbridge-frontend-0lxl.onrender.com",
       "http://localhost:3000",
     ],
     credentials: true,

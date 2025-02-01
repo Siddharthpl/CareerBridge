@@ -38,10 +38,7 @@ const Login = () => {
         }
       });
       
-      // Add more logging
-      console.log('Full Response:', res);
-      console.log('Response Headers:', res.headers);
-      console.log('Response Cookies:', document.cookie);
+     
   
       if (res.data.success) {
         dispatch(setUser(res.data.user));

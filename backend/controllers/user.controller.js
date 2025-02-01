@@ -50,7 +50,7 @@ export const login = async (req, res) => {
   try {
     const { email, password, role } = req.body;
 
-    console.log(email);
+    
     if (!email || !password || !role) {
       return res.status(400).json({
         message: "Something is missing",
@@ -93,14 +93,9 @@ export const login = async (req, res) => {
       role: user.role,
       profile: user.profile,
     };
-    console.log('Token:', token);
-    console.log('Cookie set:', res.cookie);
-    console.log('Setting cookie with options:', {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        maxAge: 24 * 60 * 60 * 1000
-      });
+   
+    
+    
     return res
       .status(200)
       .cookie("token", token, {
@@ -134,12 +129,10 @@ export const updateProfile = async (req, res) => {
 
     const file = req.file;
     // cloudinary ayega idhar
-    console.log("conntroller");
-    console.log(file);
+    
     const fileUri = getDataUri(file);
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-    console.log("cloudResponse");
-    console.log(cloudResponse);
+    
 
     let skillsArray;
     if (skills) {
